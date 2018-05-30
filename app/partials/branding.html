@@ -1,0 +1,28 @@
+<section class="category-navigation">
+    <div class="container">
+        <div class="nav navbar-nav">
+            <div class="logo">
+                <a href="catalog">
+                    <img ng-show="user.Company.LogoUrl" class="img-responsive" ng-src="{{user.Company.LogoUrl}}" />
+                    <span ng-show="!user.Company.LogoUrl"><h2>{{user.Company.Name}}</h2></span>
+                </a>
+            </div>
+        </div>
+        <ul class="nav navbar-nav pull-right hidden-xs">
+            <li class="dropdownlist" ng-repeat="t in tree" ng-class="{'active': isInPath('{{t.InteropID}}'),'dropdown': t.SubCategories.length > 0}">
+                <a ng-if="t.SubCategories.length > 0" href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="false">{{t.Name}}<b class="caret"></b></a>
+                <a ng-if="t.SubCategories.length == 0" href="catalog/{{t.InteropID}}">{{t.Name}}</a>
+                <ul ng-if="t.SubCategories.length > 0" class="dropdown-menu">
+                    <li><a href="catalog/{{t.InteropID}}">All {{t.Name}}</a></li>
+                    <li ng-repeat="sc in t.SubCategories">
+                        <a href="catalog/{{sc.InteropID}}">{{sc.Name}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div ng-show="isActive('catalog')">
+        <homemessage />
+        <customcarousel></customcarousel>
+    </div>
+</section>
